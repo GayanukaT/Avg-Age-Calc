@@ -4,25 +4,33 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Average Age Calculator</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="container">
-        <h1>Average Age Calculator</h1>
-        <input type="date" id="birthday" placeholder="Enter birthday" required>
-        <button id="addBtn">Add Birthday</button>
+    <div class="container mt-5">
+        <h1 class="text-center">Average Age Calculator</h1>
         
-        <h2>Added Birthdays:</h2>
-        <ul id="birthdayList"></ul>
+        <div class="form-group">
+            <label for="birthday">Enter Birthday:</label>
+            <input type="date" class="form-control" id="birthday" placeholder="Enter birthday" required>
+        </div>
         
-        <button id="calculateBtn">Calculate Ages</button>
+        <button class="btn btn-primary" id="addBtn">Add Birthday</button>
         
-        <h2>Results:</h2>
+        <ul class="list-group" id="birthdayList"></ul>
+        
+        <button class="btn btn-success mt-3" id="calculateBtn">Calculate</button>
+        
+        <h2 class="mt-4">Results:</h2>
         <p id="averageAge"></p>
         <p id="youngestAge"></p>
         <p id="oldestAge"></p>
     </div>
     
     <script src="script.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
