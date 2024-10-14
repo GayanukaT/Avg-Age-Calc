@@ -18,19 +18,50 @@ document.getElementById('calculateBtn').addEventListener('click', function () {
     }
 
     const ages = birthdays.map(b => calculateAge(b));
-    const averageAge = ages.reduce((a, b) => a + b, 0) / ages.length;
-    const youngestAge = Math.min(...ages);
-    const oldestAge = Math.max(...ages);
+    const youngestAge = Math.min(...ages.map(age => age.totalDays));
+    const oldestAge = Math.max(...ages.map(age => age.totalDays));
+    
+    const averageAge = ages.reduce((acc, age) => {
+        return {
+            years: acc.years + age.years,
+            months: acc.months + age.months,
+            days: acc.days + age.days,
+            totalDays: acc.totalDays + age.totalDays,
+        };
+    }, {years: 0, months: 0, days: 0, totalDays: 0});
 
-    document.getElementById('averageAge').innerText = `Average Age: ${averageAge.toFixed(2)}`;
-    document.getElementById('youngestAge').innerText = `Youngest Age: ${youngestAge}`;
-    document.getElementById('oldestAge').innerText = `Oldest Age: ${oldestAge}`;
+    const averageAgeFormatted = formatAge(averageAge);
+    document.getElementById('averageAge').innerText = `Average Age: ${averageAgeFormatted}`;
+    document.getElementById('youngestAge').innerText = `Youngest Age: ${formatAge(calculateAge(birthdays[ages.findIndex(age => age.totalDays === youngestAge)]))}`;
+    document.getElementById('oldestAge').innerText = `Oldest Age: ${formatAge(calculateAge(birthdays[ages.findIndex(age => age.totalDays === oldestAge)]))}`;
 });
 
 function calculateAge(birthday) {
-    const ageDifMs = Date.now() - birthday.getTime();
-    const ageDate = new Date(ageDifMs); // miliseconds from epoch
-    return Math.abs(ageDate.getUTCFullYear() - 1970);
+    const today = new Date();
+    let years = today.getFullYear() - birthday.getFullYear();
+    let months = today.getMonth() - birthday.getMonth();
+    let days = today.getDate() - birthday.getDate();
+    
+    if (days < 0) {
+        months--;
+        days += new Date(today.getFullYear(), today.getMonth(), 0).getDate();
+    }
+
+    if (months < 0) {
+        years--;
+        months += 12;
+    }
+
+    return {
+        years: years,
+        months: months,
+        days: days,
+        totalDays: years * 365 + months * 30 + days, // Rough estimation for total days
+    };
+}
+
+function formatAge(age) {
+    return `${age.years} years, ${age.months} months, and ${age.days} days`;
 }
 
 function validateBirthday(birthday) {
