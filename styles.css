@@ -1,13 +1,11 @@
 body {
+    background-color: #f8f9fa;
     font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
-    margin: 0;
-    padding: 0;
 }
 
 .container {
     max-width: 600px;
-    margin: 50px auto;
+    margin: auto;
     padding: 20px;
     background: white;
     border-radius: 8px;
@@ -15,16 +13,35 @@ body {
 }
 
 h1 {
-    text-align: center;
+    color: #343a40;
+    margin-bottom: 20px;
 }
 
-input[type="date"] {
-    width: calc(100% - 20px);
-    padding: 10px;
-    margin: 10px 0;
+h2 {
+    color: #343a40;
+    margin-top: 30px;
+}
+
+#averageAge, #youngestAge, #oldestAge {
+    font-size: 1.2em;
+    color: #495057;
+}
+
+.list-group-item {
+    background-color: #e9ecef;
+    margin-bottom: 5px;
 }
 
 button {
-    padding: 10px;
-    margin: 5px;
+    width: 100%;
+    margin-top: 10px;
+}
+
+button:focus {
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+button:hover {
+    background-color: #0056b3;
 }
